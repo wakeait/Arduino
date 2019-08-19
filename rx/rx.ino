@@ -5,6 +5,9 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.println("Hello! World! 測試");
-  delay(5000);
+  if (Serial.available()>0){
+    char rx = Serial.read();
+    Serial.print("received:");
+    Serial.println(rx);
+  }
 }

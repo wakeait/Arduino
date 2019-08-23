@@ -1,23 +1,18 @@
-#include <arduino.h>
-class Led{
-  private:
-    byte _pinNum;
-    
-  public:
-    Led(byte pin){
+#include "Led.h"
+ 
+    Led::Led(byte pin){
       _pinNum = pin;
       pinMode(_pinNum,OUTPUT);
      }
 
-     byte getPinNum(){
+     byte Led::getPinNum(){
         return _pinNum;
      }
 
-     void on(){
+     void Led::on(){
       digitalWrite(_pinNum,HIGH);
      }
 
-     void off(){
+     void Led::off(){
       digitalWrite(_pinNum,LOW);
      }
-};

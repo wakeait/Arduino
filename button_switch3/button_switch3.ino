@@ -28,9 +28,6 @@ class SwitchButton{
 }
 };
 
-
-
-
 Led redLed(13);
 SwitchButton btn(2);
 
@@ -50,8 +47,6 @@ void loop() {
           break;
       }
     
-
-
   Serial.print("you click:");
   Serial.println(stateChangeCount/2);
 

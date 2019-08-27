@@ -1,3 +1,6 @@
+#ifndef __SWITCHBUTTON__
+#define __SWITCHBUTTON__
+
 #include <arduino.h>
 
 class SwitchButton {
@@ -10,3 +13,5 @@ class SwitchButton {
     SwitchButton(byte);
     unsigned long getStateChangeCount();
 };
+
+#endif

@@ -1,5 +1,5 @@
 #include "Led.h"
-#include "SwitchButton.cpp"
+#include "SwitchButton.h"
 #define BtnPin 2
 
 Led redLed(13);

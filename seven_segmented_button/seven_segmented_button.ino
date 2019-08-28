@@ -25,7 +25,7 @@ void setup() {
 void loop() {
   unsigned long rightCounts = rightBtn.getStateChangeCount();  
   unsigned long getDigit = (rightCounts%20)/2;
-      displayDigit(getDigit);
+  displayDigit(getDigit);
 }
 
 void displayDigit(int displayDigit){

@@ -1,105 +1,42 @@
-void setup() {               
-  pinMode(2, OUTPUT);  
-  pinMode(3, OUTPUT);
-  pinMode(4, OUTPUT);
-  pinMode(5, OUTPUT);
-  pinMode(6, OUTPUT);
-  pinMode(7, OUTPUT);
-  pinMode(8, OUTPUT);
-  pinMode(9, OUTPUT);
-  digitalWrite(9, 0);  // 關閉小數點
+byte digits[10][7] = {
+  { 1, 1, 1, 1, 1, 1, 0 }, // = 0
+  { 0, 1, 1, 0, 0, 0, 0 }, // = 1
+  { 1, 1, 0, 1, 1, 0, 1 }, // = 2
+  { 1, 1, 1, 1, 0, 0, 1 }, // = 3
+  { 0, 1, 1, 0, 0, 1, 1 }, // = 4
+  { 1, 0, 1, 1, 0, 1, 1 }, // = 5
+  { 1, 0, 1, 1, 1, 1, 1 }, // = 6
+  { 1, 1, 1, 0, 0, 0, 0 }, // = 7
+  { 1, 1, 1, 1, 1, 1, 1 }, // = 8
+  { 1, 1, 1, 0, 0, 1, 1 } // = 9
+};
+
+byte mapArdiuinoPin[] = {2, 3, 4, 5, 6, 7, 8};
+
+void setup() {
+  Serial.begin(115200);
+  for (byte i = 0; i < 7; i++) {
+    pinMode(mapArdiuinoPin[i], OUTPUT);
+  }
 }
 
 void loop() {
-  // 顯示數字 '9'
-  digitalWrite(2, 1);
-  digitalWrite(3, 1);
-  digitalWrite(4, 1);
-  digitalWrite(5, 0);
-  digitalWrite(6, 0);
-  digitalWrite(7, 1);
-  digitalWrite(8, 1);
-  delay(1000);
-  // 顯示數字 '8'
-  digitalWrite(2, 1);
-  digitalWrite(3, 1);
-  digitalWrite(4, 1);
-  digitalWrite(5, 1);
-  digitalWrite(6, 1);
-  digitalWrite(7, 1);
-  digitalWrite(8, 1);
-  delay(1000);
-  // 顯示數字 '7'
-  digitalWrite(2, 1);
-  digitalWrite(3, 1);
-  digitalWrite(4, 1);
-  digitalWrite(5, 0);
-  digitalWrite(6, 0);
-  digitalWrite(7, 0);
-  digitalWrite(8, 0);
-  delay(1000);
-  // 顯示數字 '6'
-  digitalWrite(2, 1);
-  digitalWrite(3, 0);
-  digitalWrite(4, 1);
-  digitalWrite(5, 1);
-  digitalWrite(6, 1);
-  digitalWrite(7, 1);
-  digitalWrite(8, 1);
-  delay(1000);
-  // 顯示數字 '5'
-  digitalWrite(2, 1);
-  digitalWrite(3, 0);
-  digitalWrite(4, 1);
-  digitalWrite(5, 1);
-  digitalWrite(6, 0);
-  digitalWrite(7, 1);
-  digitalWrite(8, 1);
-  delay(1000);
-  // 顯示數字 '4'
-  digitalWrite(2, 0);
-  digitalWrite(3, 1);
-  digitalWrite(4, 1);
-  digitalWrite(5, 0);
-  digitalWrite(6, 0);
-  digitalWrite(7, 1);
-  digitalWrite(8, 1);
-  delay(1000);
-  // 顯示數字 '3'
-  digitalWrite(2, 1);
-  digitalWrite(3, 1);
-  digitalWrite(4, 1);
-  digitalWrite(5, 1);
-  digitalWrite(6, 0);
-  digitalWrite(7, 0);
-  digitalWrite(8, 1);
-  delay(1000);
-  // 顯示數字 '2'
-  digitalWrite(2, 1);
-  digitalWrite(3, 1);
-  digitalWrite(4, 0);
-  digitalWrite(5, 1);
-  digitalWrite(6, 1);
-  digitalWrite(7, 0);
-  digitalWrite(8, 1);
-  delay(1000);
-  // 顯示數字 '1'
-  digitalWrite(2, 0);
-  digitalWrite(3, 1);
-  digitalWrite(4, 1);
-  digitalWrite(5, 0);
-  digitalWrite(6, 0);
-  digitalWrite(7, 0);
-  digitalWrite(8, 0);
-  delay(1000);
-  // 顯示數字 '0'
-  digitalWrite(2, 1);
-  digitalWrite(3, 1);
-  digitalWrite(4, 1);
-  digitalWrite(5, 1);
-  digitalWrite(6, 1);
-  digitalWrite(7, 1);
-  digitalWrite(8, 0);  
-  // 暫停 4 秒鐘
-  delay(4000);
+  if (Serial.available() > 0) {
+    char getDigit = Serial.read();
+    if (getDigit >= 48 && getDigit <= 57) {
+      Serial.println(getDigit);
+      displayDigit(getDigit);
+    } else {
+      Serial.println("error");
+    }
+  }
+}
+
+void displayDigit(char displayDigit){
+  int displayIndex = (int)displayDigit - 48;
+  for(int i=0; i<7 ; i++){
+    bool onePinState = digits[displayIndex][i];
+    byte pinNum = mapArdiuinoPin[i];
+    digitalWrite(pinNum, onePinState);
+  }
 }

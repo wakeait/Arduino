@@ -1,3 +1,5 @@
+#include "SwitchButton.h"
+SwitchButton rightBtn(12);
 byte digits[10][7] = {
   { 1, 1, 1, 1, 1, 1, 0 }, // = 0
   { 0, 1, 1, 0, 0, 0, 0 }, // = 1
@@ -21,19 +23,13 @@ void setup() {
 }
 
 void loop() {
-  if (Serial.available() > 0) {
-    char getDigit = Serial.read();
-    if (getDigit >= 48 && getDigit <= 57) {
-      Serial.println(getDigit);
+  unsigned long rightCounts = rightBtn.getStateChangeCount();  
+  unsigned long getDigit = (rightCounts%20)/2;
       displayDigit(getDigit);
-    } else {
-      Serial.println("error");
-    }
-  }
 }
 
-void displayDigit(char displayDigit){
-  int displayIndex = (int)displayDigit - 48;
+void displayDigit(int displayDigit){
+  int displayIndex = (int)displayDigit;
   for(int i=0; i<7 ; i++){
     bool onePinState = digits[displayIndex][i];
     byte pinNum = mapArdiuinoPin[i];

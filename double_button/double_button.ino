@@ -53,7 +53,7 @@ void loop() {
           greenLed.on();
           break;
         }
-       else {
+       else if (rightCounts % 6 == 4) {
           redLed.off();
           yellowLed.on();
           greenLed.on();

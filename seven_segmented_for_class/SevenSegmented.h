@@ -8,7 +8,7 @@ class SevenSegmented{
   /*
    * 儲存0-9的訊息資訊
    */
-  byte digits[10][7] = {
+  byte _digits[10][7] = {
   { 1, 1, 1, 1, 1, 1, 0 }, // = 0
   { 0, 1, 1, 0, 0, 0, 0 }, // = 1
   { 1, 1, 0, 1, 1, 0, 1 }, // = 2
@@ -18,11 +18,11 @@ class SevenSegmented{
   { 1, 0, 1, 1, 1, 1, 1 }, // = 6
   { 1, 1, 1, 0, 0, 0, 0 }, // = 7
   { 1, 1, 1, 1, 1, 1, 1 }, // = 8
-  { 1, 1, 1, 0, 0, 1, 1 } // = 9
+  { 1, 1, 1, 0, 0, 1, 1 }  // = 9
 };
   byte* _mapArdiuinoPin;
   public:
     SevenSegmented(byte* pins);
-    void displayDigit(int displayDigit);
+    void displayDigit(int n);
 };
 #endif

@@ -2,6 +2,15 @@
 
 SevenSegmented::SevenSegmented(byte* pins){
   _mapArdiuinoPin = pins;
-  Serial.begin(115200);
-  Serial.print(_mapArdiuinoPin[0]);  
+  for (byte i = 0; i < 7; i++) {
+    pinMode(_mapArdiuinoPin[i], OUTPUT);
+  }  
 };
+
+void SevenSegmented::displayDigit(int n){
+  for(int i=0; i<7 ; i++){
+    bool onePinState = _digits[n][i];
+    byte pinNum = _mapArdiuinoPin[i];
+    digitalWrite(pinNum, onePinState);
+  }
+ };

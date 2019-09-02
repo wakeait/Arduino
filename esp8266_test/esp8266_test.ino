@@ -23,4 +23,13 @@ void setup()
   Firebase.setMaxRetry(firebaseData, 3);
   Firebase.setMaxErrorQueue(firebaseData, 30);
 }
-void loop() {}
+void loop() {
+  if (Firebase.getBool(firebaseData, "/iot0624/LED")) {
+    if (firebaseData.dataType() == "boolean") {
+      Serial.println(firebaseData.boolData());
+    }
+  } else {
+    Serial.println(firebaseData.errorReason());
+  }
+  delay(500);
+}

@@ -19,5 +19,8 @@ void setup()
   Serial.println(WiFi.localIP());
 
   Firebase.begin("iotwilly.firebaseio.com", "O4sQ98sdnxVyKmts0ZQ6VG8LtQIcChnCqvBgDW05");
+  Firebase.reconnectWiFi(true);
+  Firebase.setMaxRetry(firebaseData, 3);
+  Firebase.setMaxErrorQueue(firebaseData, 30);
 }
 void loop() {}

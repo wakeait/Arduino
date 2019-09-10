@@ -36,21 +36,17 @@ void setup()
   pinMode(latchPin, OUTPUT);
   pinMode(clockPin, OUTPUT);
   t.every(1000, oneSecondRun);
-  t.every(5,dotZeroZeroFiveRun);
 }
 
 void loop()
 {
   t.update();
+  displayLED(tempC);
 }
 
 void oneSecondRun(){
   tempC = getTemperature();
   Serial.println(tempC);
-}
-
-void dotZeroZeroFiveRun(){
-  displayLED(tempC);
 }
 
 float getTemperature() {
